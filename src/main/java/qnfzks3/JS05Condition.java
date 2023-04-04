@@ -1,5 +1,7 @@
 package qnfzks3;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.Scanner;
 
 public class JS05Condition {
@@ -48,7 +50,7 @@ public class JS05Condition {
         
         //if ~ else 문
         //평균 점수가 60점 이상이면, 합격  ! 출력
-        //평균점ㅅ가 60점 미만이면, 불합격 ! 출력
+        //평균점수가 60점 미만이면, 불합격 ! 출력
         System.out.println("점수는?");
         Scanner sc=new Scanner(System.in);                 //스케너는 한번 적어 놓으면 계속 사용 가능하다
         int jumsu=sc.nextInt();
@@ -73,7 +75,7 @@ public class JS05Condition {
         // 따라서, 문자열 자체를 비교하시려면 equals()를 사용
         //if (userid == inputid && passwd == inputpw){
         if (userid.equals(inputid) && passwd.equals(inputpw)){ //이렇게 하면 , 값이 저장 되어있는 곳에 위치를 비교해버리게 된다 그렇기때문에 값으로 바꿔준다. if holse
-            System.out.println("로그인 되었습니다.");
+            System.out.println("로그인 되었습니다.");          //문자형일 때만 equals 사용하며 숫자는 ==를 사용해준다. equals는 객체를 비교하는데 사용한다.
         }else{
             System.out.println("로그인 실패하였습니다.");
 
@@ -120,6 +122,77 @@ public class JS05Condition {
         // 청소년 (14~19) : 720원
         // 일반 (20~) : 1200원
         // 노인 (70~) : 0원
+
+        System.out.println("버스 요금 안내입니다. 나이를 입력해주세요");
+        int agebus = sc.nextInt();
+        int fee=0;
+        if (agebus >=70) fee=0;
+        else if (agebus>=20) fee=1200;
+        else if (agebus>=14) fee=720;
+        else if (agebus>=8) fee=450;
+        else fee =0;
+
+        System.out.printf("나이 : %d, 요금 : %d \n", agebus,fee);
+
+        //switch
+        // 다중 조건문을 가독성 있게 작성한 조건문
+
+        //자바스크립트는 이렇게 쓸수 있지만 자바는 안된다.
+        /*num = 74;
+        String result="";
+        switch (num%2==0){
+            case true: result = "짝수"; break;
+            case false: result = "홀수"; break;
+
+        }
+        System.out.println(result);
+        */
+
+        // 평균 점수에 따라 수우미양가 성적 결과 출력
+        avg = 89.4;
+        grd = "";
+
+        switch ((int)(avg/10)){   //(int)()   int-정수로 바꿔줌
+            case 10:
+            case 9: grd= "수"; break;
+            case 8: grd= "우"; break;
+            case 7: grd= "미"; break;
+            case 6: grd= "양"; break;
+            default:grd= "가"; break;
+            
+        }
+        // ex) 월 , 윤년여부 (Y/N)를 입력하면 해당 월의 마지막 날을 출력
+        // 1,3,5,7,8,10,12 -31일
+        // 4,6,9,11 - 30일
+        // 2- 윤년 여부에 따라 28(N)일 or 29(Y)일
+        System.out.println("월은? ");
+        int month=sc.nextInt();
+        System.out.println("윤년여부는? (y/n)");
+        String isLeapYear = sc.next();
+
+
+        int lastDay=0;
+
+        switch (month){
+            case 1: case 3: case 7: case 8: case 10: case 12:
+                lastDay=31;
+                break;
+
+            case 4: case 6: case 9: case 11:
+                lastDay=30;
+                break;
+
+                case 2:
+                if (isLeapYear.equalsIgnoreCase("Y")){ //equalsIgnoreCase 대소문자 구분 안하고 사용하고싶다면 쓰는 함수
+                    lastDay=29;
+                } else{
+                    lastDay=28;
+                    break;
+                }
+
+        }
+        System.out.printf("%d월은 %d일 (윤년:%s) \n",month,lastDay,isLeapYear);
+
 
 
 
