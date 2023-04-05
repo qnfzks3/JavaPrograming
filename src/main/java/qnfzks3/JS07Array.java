@@ -75,9 +75,9 @@ public class JS07Array {
             int inputnum=sc.nextInt();
             nums[i]=inputnum;
             sum+=nums[i];   //누적합
-            avg=sum/nums.length;
         }// 배열 만들기
-        
+
+        avg=sum/nums.length;
         for (int i = 0; i < nums.length; i++) {
             System.out.printf("%d번째 숫자는 %d \n",i,nums[i]);
         }
@@ -154,8 +154,8 @@ public class JS07Array {
         }
         String result="";
         for (int i=0; i< names.length; i++){
-            result += String.format("%s %d %d %d \n",names[i],kor[i],eng[i],math[i]);
-            result += String.format("%d %.1f %c \n",tots[i],avgs[i],grds[i]);
+            result += String.format("%s 학생  국어: %d점 영어: %d점 수학: %d점 \n",names[i],kor[i],eng[i],math[i]);
+            result += String.format("총합: %d  평균: %.1f 성적: %s \n",tots[i],avgs[i],grds[i]);
         }
         System.out.println(result);
 
