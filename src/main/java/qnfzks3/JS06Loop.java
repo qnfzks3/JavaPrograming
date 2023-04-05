@@ -58,6 +58,37 @@ public class JS06Loop {
         sum=stnum+ednum *((ednum-stnum+1)/2);
         System.out.println(sum);
 
+        // 1부터 10000까지의 총합을 계산
+        // 단, 총합이 10000을 넘으면 계산을 중단함 fori 하고 탭하면 좀 더 편리해짐 
+        int mansum=0;
+        for (int i=0; i<=10000; i++){
+            mansum+=i;
+            if (mansum>=10000){
+                System.out.println(mansum);
+                break;
+            }
+        }
+        
+        //분기문 : continue
+        //반복을 일시적으로 건너뛰어 다음 반복으로 넘어가도록 함
+
+        // 1부터 10000까지의 총합을 계산
+        // 단, 5의 배수나 7의 배수는 계산에서 제외함
+        sum=0;
+        for (int i = 0; i <= 10000; i++) {
+            if (i%5!=0 && i%7!=0){
+                sum+=i;
+
+            }
+        }
+        System.out.println(sum);
+
+        sum=0;
+        for (int i = 0; i <= 10000; i++) {
+            if (i % 5 == 0 || i % 7 == 0) continue;
+            sum += i;
+        }
+        System.out.println(sum);
 
 
 
