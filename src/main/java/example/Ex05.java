@@ -168,9 +168,29 @@ public class Ex05 {
 
         }
         System.out.println(result);
+        
+        
+        //34. 거리에 따라 다음 요금이 정해져 있다. 거리를 km 로 입력했을 때 배송료를 계산하는 프로그램을 작성하여라.
+        //가 . 50km 미만 : 10,000원  , 나. 50~100km : 18,000원 , 다. 100~300km : 55,000원  , 라. 300km이상 : 75,000원
+
+        System.out.println("몇 km 이동 하였는지 적어주세요");
+        int distance = sc.nextInt();
+        int price = 0;
+        if (distance<50){
+            price=10000;
+
+        }else if(distance >= 50 && distance<100){
+            price=18000;
 
 
+        } else if (distance>=100 && distance<300) {
+            price=55000;
 
+        }else if(distance>=300){
+            price=75000;
+
+        }
+        System.out.printf("%dkm에 대한 가격은 %d원 입니다. \n",distance,price);
 
     }
 }
