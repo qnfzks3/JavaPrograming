@@ -11,55 +11,66 @@ public class Ex06 {
         // 나 . 변수에 임의의 복권 숫자 3자리를 초기화 합니다.
         // 다 . 사용자가 입력한 복권 숫자가 모두 일치: 상금 1백만 지급
         // 라 . 일치하지 않는 경우 : "아쉽지만, 다음 기회를!"라고 출력
-        int[] Lottos=new int[3];
+        //  완벽한 로또 만들기!
+        int n= 3; //로또 번호의 개수 지정
+        int[] Lottos=new int[n];
         Random rnd= new Random();  // 난수 생성 정의
         int key=rnd.nextInt(44)+1;  // 난수 범위 지정  - 1 부터 999까지
         //String lottokey =String.valueOf(key);
         //nextInt(경게값): 0~ 경계값-1 사이의 정수 난수 출력
         //1~9 사이 임의의 정수 3개를 난수로 생성
         //lottokey +=rnd.nextInt(9)+1;
-        int[] winnum=new int[3];
-        for (int i = 0; i <3 ; i++) {
+        int[] winnum=new int[n];
+        for (int i = 0; i < winnum.length ; i++) {
             winnum[i]=key;
             key=rnd.nextInt(44)+1;
         }
-
-        int[] Winnum={1,24,16};
-        int first=0;
         int duple=0;
         int Count=0;
-        for (int i = 0; i < 3; i++) {
-            System.out.printf("%d번째 복권 번호를 기입하세요!!(1~45)\n",i+1);
-            while (true){
-                int Lottofirst= sc.nextInt();
+        while (true){ // 복권 기능 수행 
+            for (int i = 0; i < winnum.length; i++) {
+                System.out.printf("%d번째 복권 번호를 기입하세요!!(1~45)\n",i+1);
+                while (true){
+                    int Lottofirst= sc.nextInt();  // 복권 값을 입력 받음
 
-                if (Lottofirst>=1 && Lottofirst<=45 ){
-                    Lottos[i]=Lottofirst;
-                    System.out.printf("입력하신 %d번째 숫자는 %d입니다. \n",i+1,Lottofirst);
-                    break;
-                }else System.out.println("잘못기입하셧습니다.중복되지 않는 1~45 사이 숫자로 기입해주세요");
+                    if (Lottofirst>=1 && Lottofirst<=45 ){
+                        Lottos[i]=Lottofirst;
+                        System.out.printf("입력하신 %d번째 숫자는 %d입니다. \n",i+1,Lottofirst);
+                        break;
+                    }else System.out.println("잘못기입하셧습니다.중복되지 않는 1~45 사이 숫자로 기입해주세요");
+                }
             }
+            for (int j = 0; j < winnum.length; j++) {
+                for (int k = 0; k < winnum.length; k++) {
+                    if (Lottos[j]==Lottos[k]){
+                        duple++;
+                    }
+                }
+            }
+            if (duple>winnum.length){
+                System.out.println("추첨번호중 중복되는 번호가 있습니다. 다시 시도해주세요");
+                duple=0;
+            }else break;
+        }//while 끝
+        System.out.println("내 복권 번호 : ");
+        for (int i = 0; i < winnum.length; i++) {
+            System.out.printf(" %d ,",Lottos[i]);
         }
-        System.out.printf("내 복권 번호는 %d, %d, %d입니다.",Lottos[0],Lottos[1],Lottos[2]);
-        System.out.printf("이번 당첨 번호는 %d ,%d %d 입니다.",winnum[0],winnum[1],winnum[2]);
+        System.out.println("입니다.\n");
+        System.out.println("이번주 추첨 번호:");
+        for (int i = 0; i < winnum.length; i++) {
+            System.out.printf("%d ,",winnum[i]);
+        }
+        System.out.println("입니다. \n");
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (Lottos[i]==winnum[j]){
                     Count+=1;
                 }
-
             }
         }
-        for (int j = 0; j < 3; j++) {
-            for (int k = 0; k < 3; k++) {
-                if (Lottos[j]==Lottos[k]){
-                    duple++;
-                }
-            }
-        }
-        if (duple>3){
-            System.out.println("추첨번호중 중복되는 번호가 있습니다. 다시 시도해주세요");
-        }else if(Count>=3){
+        if(Count>=3){
             System.out.println("축하합니다. 당첨 되셨습니다.");
         }else {
             System.out.println("낙첨되었습니다. 아쉽지만 다음 기회에");
