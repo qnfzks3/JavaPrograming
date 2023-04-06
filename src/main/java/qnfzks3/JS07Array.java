@@ -98,7 +98,8 @@ public class JS07Array {
         // 3명의 학생에 대해 이름, 국어, 영어, 수학을 입력받아 총점,평균,학점을 계산한 뒤 결과 출력
         // 단, 학점은 수우미양가 중 하나가 출력되어야 함
 
-       /* String[][] students=new String[3][4];
+       /*
+        String[][] students=new String[3][4];
         String[] score=new String[4];
 
         for (int i = 1; i < 4; i++) {
@@ -117,7 +118,8 @@ public class JS07Array {
                 int math=sc.nextInt();
                 score[i]=name;
             }
-        }*/
+        }
+        */
         //--------------------------------------------------------------
 
         String[] names=new String[3];
