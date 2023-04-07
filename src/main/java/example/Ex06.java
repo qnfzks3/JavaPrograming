@@ -12,7 +12,8 @@ public class Ex06 {
         // 다 . 사용자가 입력한 복권 숫자가 모두 일치: 상금 1백만 지급
         // 라 . 일치하지 않는 경우 : "아쉽지만, 다음 기회를!"라고 출력
         //  완벽한 로또 만들기!
-        int n= 3; //로또 번호의 개수 지정
+
+        int n= 6; //로또 번호의 개수 지정
         int[] Lottos=new int[n];
         Random rnd= new Random();  // 난수 생성 정의
         int key=rnd.nextInt(44)+1;  // 난수 범위 지정  - 1 부터 999까지
@@ -57,9 +58,10 @@ public class Ex06 {
             System.out.printf(" %d ,",Lottos[i]);
         }
         System.out.println("입니다.\n");
+
         System.out.println("이번주 추첨 번호:");
         for (int i = 0; i < winnum.length; i++) {
-            System.out.printf("%d ,",winnum[i]);
+            System.out.printf(" %d ,",winnum[i]);
         }
         System.out.println("입니다. \n");
 
