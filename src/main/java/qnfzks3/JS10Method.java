@@ -1,5 +1,7 @@
 package qnfzks3;
 
+import java.util.Scanner;
+
 public class JS10Method {
     public static void main(String[] args) {
         // 메서드
@@ -82,5 +84,8 @@ public class JS10Method {
 
         return result;
     }
+
+
+
 
 }
