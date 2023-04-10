@@ -2,13 +2,14 @@ package qnfzks3;
 
 import java.util.Scanner;
 
-public class BookMarketService {
+public class BookMarketService { //클래스 파일들 가져다 쓰기위한
     private Scanner sc=null; //값을 저장하기 위한 변수는 아님 그냥 기능을 위해 변수로 정의 했을뿐이래요
+    private MemberShip m = null;  //아직 값이 할당 안됨 -  초기값은 null
 
-    public  BookMarketService(){
+    public  BookMarketService(){ //오버로딩 -근데 이걸 왜 이렇게 썻죠?
         sc = new Scanner(System.in);
     }
-    public String displayMenu(){
+    public String displayMenu(){ //함수에 리턴값으로 준다면 void-없다면 함수도 리턴값의 자료형을 따라 가야한다.
         //bookmarket 메뉴 작성
         StringBuilder sb=new StringBuilder();
 
@@ -39,7 +40,9 @@ public class BookMarketService {
         //메뉴에 따라 작업 분기
         switch (menu){
             case "1":
-                System.out.println("\n 고객정보 확인 \n"); break;
+                System.out.println("\n 고객정보 확인 \n");
+                System.out.println(m);
+                break;
             case "2":
                 System.out.println("\n장바구니 상품 목록\n"); break;
             case "3":
@@ -60,6 +63,24 @@ public class BookMarketService {
 
         }
     }
+    //회원 등록
+    public void registerMember(){
+        System.out.print("회원 이름은? ");
+        String name =sc.next();
+
+        System.out.print("회원 이메일은? ");
+        String email =sc.next();
+
+        System.out.print("회원 전화번호는? ");
+        String hp =sc.next();
+
+        m= new MemberShip(230410,name,email,hp);
+    }
+
+
+
+
+
 
 }
 

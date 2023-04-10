@@ -6,9 +6,11 @@ public class BookMarket {
     
     // 프로그램 실행 흐름
     // BookMarket - > Book       Book,Member - > BookService
-    public static void main(String[] args) {
+    public static void main(String[] args) { //일단 여긴 매인
 
         BookMarketService bksrv= new BookMarketService();
+
+        bksrv.registerMember();;//회원 등록 및 정보 확인
 
         while (true) {
             //bookmarket
