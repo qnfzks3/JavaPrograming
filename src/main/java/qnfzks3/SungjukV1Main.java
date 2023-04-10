@@ -2,7 +2,8 @@ package qnfzks3;
 
 public class SungjukV1Main {
     public static void main(String[] args) {
-        //성적 처리프로그램 v1
+
+        //성적 처리프로그램 v1   --스프링 까지 들어가면 이 성적 처리 프로그램은 5개의 파일을 만들어질 것
         //배열과 클래스를 이용해서 성적을 입력하면 총점, 평균 , 학점을 계산함
         //입력가능한 학생 성적 데이터는 최대 10명 까지
         //SungJukV1Main , SungJukVO , SungJukV1Service
