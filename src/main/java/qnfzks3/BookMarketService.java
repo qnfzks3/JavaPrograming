@@ -25,7 +25,7 @@ public class BookMarketService {
                 .append("7. 상품 주문 영수증 출력 \n")
                 .append("0. 프로그램 종료 \n")
                 .append("---------------------------- \n")
-       .append("작업을 선택하세요 : \n");
+       .append("작업을 선택하세요 : \n");  // sout 으로 한거랑 크게 다르지 않음 그냥 이런 방법도 있다
 
         System.out.print(sb);
         String menu = sc.next(); //선택한, 작업할 메뉴를 입력 받기
