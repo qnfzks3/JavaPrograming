@@ -23,12 +23,27 @@ public class SungjukV1Main {
         // sjsrv.displayMenu() 선언햇으니 클래스안에 함수 꺼내서 사용  - while로 무한 반복으로 사용
         //sjsrv.processMenu() 사용 -- 스위치 만들어주는 함수 - 우리가 적은 숫자를 스위치로 받아서 작동시키기 위한 함수만들기
         // 서비스 함수에는 메뉴 출력하는 함수  , 매뉴를 보고 유저가 한 작동에 대한 정보를 출력하도록 하는 함수 ,
-        
-        
-        
+        //SungJukVO 를 만든다. - 우리가 원하는 변수들을 만들어서 캡슐화 해준다.
+
+        // 중요!) 6. 이제 서비스로 switch 화면으로 와서 switch에 해당 기능들을 넣어준다. 기능 기본 5개
+        // 1. 성적 데이터 추가  함수 만들기=> new SungJuk();
+        //new SungJuk 데이터 -> 스케너로 값을 받아서(국어 영어 수학) 이 값들을  SungJukVO 클래스의 매개변수로 생성해준다.
+        // 그 이후에 computerSungJuk()로 토탈 평균 등등 을 만들고 성적 처리 함수를 만든다. -
+        // 그 후에 이 성적 데이터를 처리해서 배열에 저장해준다. sjs[idx++] =sj          ->idx 는 클래스 처음으로가서 int로 선언함
+        // 여담)- 배열안에 들어간 데이터들 보고싶다면 디버그(오른쪽 위 빨간버튼누르고)로 보고싶은 함수 안 찍고 (실행해 값넣은거 f8누르면 데이터 볼수있다.)
+        // 다음 - 성적 리스트 조회 (이름, 국어 , 영어, 수학)  - 스위치 2번 readSungJuk() 함수 만들기
+        // for 사용해서 성적 출력  - 그런데 여기서 데이터가 안들어갈때가 있는데 - 성적 데이터가 비어있으면 오류가 출력되니깐 - 성적 데이터가 없으면 출력되지 않도록한다.
+        //  if(sj != null)
 
 
 
+        SungJukV1Service sjsrv = new SungJukV1Service();
 
+        while (true) {
+            String menu = sjsrv.displayMenu();
+
+            sjsrv.processMenu(menu);
+        }
     }
+
 }
