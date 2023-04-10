@@ -4,10 +4,14 @@ import java.util.Scanner;
 
 public class BookMarketService { //클래스 파일들 가져다 쓰기위한
     private Scanner sc=null; //값을 저장하기 위한 변수는 아님 그냥 기능을 위해 변수로 정의 했을뿐이래요
-    private MemberShip m = null;  //아직 값이 할당 안됨 -  초기값은 null
+    private MemberShip m = null;  //아직 값이 할당 안됨 -  초기값은 null  그냥 클래스와 함수로 만들기
+
+    private BookInfo[] books=null;  // 배열로 만들어보기
 
     public  BookMarketService(){ //오버로딩 -근데 이걸 왜 이렇게 썻죠?
         sc = new Scanner(System.in);
+        registerBooks();
+
     }
     public String displayMenu(){ //함수에 리턴값으로 준다면 void-없다면 함수도 리턴값의 자료형을 따라 가야한다.
         //bookmarket 메뉴 작성
@@ -48,7 +52,11 @@ public class BookMarketService { //클래스 파일들 가져다 쓰기위한
             case "3":
                 System.out.println("\n장바구니 비우기\n");break;
             case "4":
-                System.out.println("\n장바구니 상품 추가\n");break;
+                System.out.println("\n장바구니 상품 추가\n");
+                for (BookInfo b: books) {
+                    System.out.println(b);
+                }
+                break;
             case "5":
                 System.out.println("\n주문수량 변경\n"); break;
             case "6":
@@ -75,6 +83,18 @@ public class BookMarketService { //클래스 파일들 가져다 쓰기위한
         String hp =sc.next();
 
         m= new MemberShip(230410,name,email,hp);
+    }
+    
+    //도서 정보 자동 등록
+    public void registerBooks(){
+        books=new BookInfo[3];
+        books[0]=new BookInfo("230412221",
+                "JSP웹프로그래밍",27000,"송미영","단계별로 쇼핑몰 구현","2018-10-08","IT전문서");
+
+        books[1]=new BookInfo("2304104567",
+                "안드로이드 프로그래밍",33000,"우재남","실습 멘토링 제공","2022-01-22","IT전문서");
+        books[2]=new BookInfo("2304107891",
+                "스크래치",22000,"고광일","사고력을 키우는 코딩","2019-06-19","컴퓨터입문");
     }
 
 
