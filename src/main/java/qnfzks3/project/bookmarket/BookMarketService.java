@@ -1,4 +1,6 @@
-package qnfzks3;
+package qnfzks3.project.bookmarket;
+
+import qnfzks3.project.MemberShip;
 
 import java.util.Scanner;
 

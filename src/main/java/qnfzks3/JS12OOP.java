@@ -1,7 +1,17 @@
 package qnfzks3;
 
 public class JS12OOP {
+
+    // 클래스 종류
+    // VO/DTO : ValueObject, Data Transfer Object
+    // 계층간 데이터교환을 위한 자바빈즈를 의미
+    // 값만 저장하기 위해 생성하는 클래스
+    // 주로 데이터베이스 테이블의 각 열과 연계해서 작성
+    //class는 테이블 class 와 CRUD (함수만 있는)class 구현하는게 자바 목적
+    //class에 있는 변수들은 private로 쓴다.
+
     public static void main(String[] args) {
+
         Person2 p1=new Person2();
         
         //객체 멤버 변수 초기화 - private  = > 실패 : public으로만
@@ -48,7 +58,7 @@ class Person2 {
     //private 으로 선언된 변수를 외부에 접근할 수 있도록
     //정의하는 특수한 메서드
 
-    //getXxx 이름 지정 -- 이렇게 프리베잇으로 있는 변수는 따로 public 타입 get~으로 사용해주어야한다.
+    //getXxx 이름 지정 -- 이렇게 프리베잇으로 있는 변수는 따로 public 타입 get~으로 사용해주어야한다. - get 으로 값을 가져올 대 사용
     public String getName(){
         return name;
     }
@@ -62,7 +72,11 @@ class Person2 {
         return gender;
     }
 
-    //setXxx
+    //setXxx                       - set으로 값을 내보낼때 사용  get 과 set 을 하는 이유는 private 로 바로 사용할 수 없으니 
+    //                              - get 으로 가져와서 다시 정의한 다음 set 으로 내보내기 위해 다시 정의하고 밖으로 언제든 가져다 쓸수있도록 한다.
+
+    //                              또한 이런 클라스 자체를 매개변수로 사용해서 안에있는 변수들을 get(가져오다)으로 꺼내서(가져와서) 사용할수도 있다.
+    //                               ex) Person.getAge(25) 이런식으로 언제든 사용가능
     public void setName(String name){
         this.name=name;
     }
@@ -83,4 +97,6 @@ class Person2 {
         String fmt = "%s %s %d %s";
         return String.format(fmt,name,job,age,gender);
     }
+
+
 }

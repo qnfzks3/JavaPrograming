@@ -1,4 +1,4 @@
-package qnfzks3;
+package qnfzks3.project.sungjuk.model;
 
 import java.util.StringJoiner;
 

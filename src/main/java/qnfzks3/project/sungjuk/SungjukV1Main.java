@@ -1,4 +1,6 @@
-package qnfzks3;
+package qnfzks3.project.sungjuk;
+
+import qnfzks3.project.sungjuk.service.SungJukV1Service;
 
 public class SungjukV1Main {
     public static void main(String[] args) {

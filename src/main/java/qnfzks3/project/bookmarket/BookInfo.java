@@ -1,4 +1,4 @@
-package qnfzks3;
+package qnfzks3.project.bookmarket;
 
 import java.util.StringJoiner;
 

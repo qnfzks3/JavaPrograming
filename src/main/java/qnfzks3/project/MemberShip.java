@@ -1,4 +1,4 @@
-package qnfzks3;
+package qnfzks3.project;
 
 import java.util.StringJoiner;
 

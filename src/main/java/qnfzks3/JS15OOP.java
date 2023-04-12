@@ -28,7 +28,7 @@ public class JS15OOP {
     }
 }
 
-class Member{
+ class Member{
     private String name;
     private String hp1;   // 지역번호
     private String hp2;  // 국번

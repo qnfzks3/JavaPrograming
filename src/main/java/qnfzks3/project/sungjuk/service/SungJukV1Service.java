@@ -1,4 +1,6 @@
-package qnfzks3;
+package qnfzks3.project.sungjuk.service;
+
+import qnfzks3.project.sungjuk.model.SungJukVO;
 
 import java.util.Scanner;
 

@@ -1,11 +1,10 @@
-package qnfzks3;
-
-import java.util.Scanner;
+package qnfzks3.project.bookmarket;
 
 public class BookMarket {
     
     // 프로그램 실행 흐름
     // BookMarket - > Book       Book,Member - > BookService
+    // 매인 자바 <- 기능 자바   <- 캡슐화 자바
     public static void main(String[] args) { //일단 여긴 매인
 
         BookMarketService bksrv= new BookMarketService();
