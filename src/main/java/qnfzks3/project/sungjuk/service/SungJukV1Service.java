@@ -16,8 +16,8 @@ public class SungJukV1Service {
 
     // 성적 프로그램 메뉴
     public String displayMenu() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("---------------------------- \n")
+        StringBuilder sb = new StringBuilder();                    //보통 그냥 string으로 저장할 경우에는 이전에 지정했던 변수가 남는데 이를 방지하기위해
+        sb.append("---------------------------- \n")              // StringBuffer 를 사용 한다.
                 .append(" 성적 처리 프로그램 v1 \n")
                 .append("---------------------------- \n")
                 .append(" 1. 성적데이터 추가 \n")

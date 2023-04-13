@@ -84,6 +84,9 @@ public class JS20Exception {
                     break;
                 }
             }catch (Exception ex){  //그냥 이거 쓰자 이게 모든 경우라서 이게 좋음
+                //nextInt 시 문자를 입력 했을 때 입력 버퍼에 남은 문자 찌거기 제거
+                sc.nextLine();
+                
                 System.out.println("1 ~ 9 사이 숫자만 입력해주세요");
             }
         }
@@ -116,6 +119,7 @@ public class JS20Exception {
                     break;
                 }
             }catch (InputMismatchException ex){  // 데이터 타입등의 에러 인트형인데 스트링으로 적으면
+                sc.nextLine();
                 System.out.println("1 ~ 9 사이 숫자만 입력해주세요");
             }
         }

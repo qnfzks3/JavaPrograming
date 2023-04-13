@@ -54,6 +54,12 @@ public class JS21Collection {
         names.remove(1);
         System.out.println(names.get(1));
 
+        //특정요소 제거 : remove(값)
+
+        names.remove("수지");
+        System.out.println(names.get(names.size()-1));
+
+
         // 배열에서 데이터 검색 - 위치로 찾음 : get(위치)   , indexOf
         //                   - 값으로 찾음 : contains, indexOf
         // '지현'을 검색 1
