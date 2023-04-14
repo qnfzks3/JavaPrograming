@@ -39,4 +39,9 @@ public class SungJukV3DAOImpl implements SungJukV3DAO {
         }
         return true;
     }
+
+    @Override
+    public List<SungJukVO> loadSungJuk() {
+        return null;
+    }
 }
