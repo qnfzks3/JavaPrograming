@@ -1,6 +1,8 @@
 package qnfzks3.project.sungjuk.service;
 
 
+import qnfzks3.project.sungjuk.dao.SungJukV3DAO;
+import qnfzks3.project.sungjuk.dao.SungJukV3DAOImpl;
 import qnfzks3.project.sungjuk.model.SungJukVO;
 
 import java.io.*;
@@ -12,17 +14,12 @@ import java.util.Scanner;
 public class SungJukV3ServiceImpl implements SungJukV2Service {
     private Scanner sc = null;
     private List<SungJukVO> sjs = null;
-    private int idx = 0;
-
-    private String fname = "c:/Java/sungjukv3.dat";
-    private FileWriter fw=null;  // 처음에는 항상 초기화 null을 써주자
-    private FileReader fr=null;
-    private BufferedWriter bw=null;
-    private BufferedReader br=null;
+    private SungJukV3DAO sjdao = null;
 
     public SungJukV3ServiceImpl() {
         sc = new Scanner(System.in);
         sjs = new ArrayList<>();
+        sjdao = new SungJukV3DAOImpl();
     }
 
     // 성적 프로그램 메뉴
@@ -57,24 +54,12 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
 
     public void processMenu(int menu) {
         switch (menu) {
-            case 1:
-                newSungJuk();
-                break;
-            case 2:
-                readSungJuk();
-                break;
-            case 3:
-                readOneSungJuk();
-                break;
-            case 4:
-                modifySungJuk();
-                break;
-            case 5:
-                removeSungJuk();
-                break;
-            case 0:
-                System.exit(0);
-                break;
+            case 1: newSungJuk(); break;
+            case 2: readSungJuk(); break;
+            case 3: readOneSungJuk(); break;
+            case 4: modifySungJuk(); break;
+            case 5: removeSungJuk(); break;
+            case 0: System.exit(0); break;
             default:
                 System.out.println("\n>> 잘못 입력하셨습니다! <<\n");
         }
@@ -85,15 +70,13 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
         System.out.print("삭제할 학생이름은? ");
         String name = sc.next();
 
-
-            for (SungJukVO sj: sjs) {  //sjs 에서 SungJukVO이라는 데이터인 sj를 가져온다.?
-                if (sj.getName().equals(name)) {
-                    sjs.remove(sj);   //대상을 list에서 삭제
-                    System.out.println("\n삭제되었습니다\n");
-                    break;
-                }
+        for (SungJukVO sj : sjs) {
+            if (sj.getName().equals(name)) {
+                sjs.remove(sj);   // 대상을 list에서 삭제
+                System.out.println("\n삭제되었습니다\n");
+                break;
             }
-
+        }
 
     }
 
@@ -102,7 +85,7 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
         System.out.print("수정할 학생이름은? ");
         String name = sc.next();
 
-        for (int i = 0; i <sjs.size() ; i++){  //sjs 에서 성적데이터 SungJukVO sj를 뽑아온다
+        for (int i = 0; i < sjs.size(); i++) {
             try {
                 if (sjs.get(i).getName().equals(name)) {
                     System.out.print("국어는? ");
@@ -114,8 +97,7 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
 
                     SungJukVO newOne = new SungJukVO(name, kor, eng, mat);
                     computeSungJuk(newOne);
-                    sjs.set(i,newOne);   // 기존 성적데이터 위치에
-                    // 새롭게 생성한 객체 대입
+                    sjs.set(i, newOne);   // 기존 성적데이터 위치에 새롭게 생성한 객체 대입
                     System.out.println("\n수정완료!!\n");
                     break;
                 }
@@ -183,55 +165,25 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
             sc.nextLine();
             return;
         }
-        SungJukVO sj = new SungJukVO(name, kor, eng, mat);
-        computeSungJuk(sj);    // 성적 처리
-        //생성된 성적 데이터를 파일로 저장
-        try {
-            fw=new FileWriter(fname,true);
-            bw=new BufferedWriter(fw);
-            bw.write(sj.toString());
-        } catch (Exception ex) {
-            System.out.println("성적 데이터 저장중 오류발생!");
-            System.out.println(ex.getMessage());
-        } finally {
-            if (bw != null) {
-                try {
-                    bw.close();
-                } catch (Exception ex) {
-                }
-            }
-            if (bw != null) {
-                try {
-                    fw.close();
-                } catch (Exception ex) {
-                } //쓰기만 적ㅇㅁ
-            }
-        }
 
+        SungJukVO sj = new SungJukVO(name, kor, eng, mat);
+        computeSungJuk(sj);
+
+        // 성적데이터에 파일에 저장
+        if ( sjdao.saveSungJuk(sj) )
+            System.out.println("\n저장 성공!!\n");
     }
 
-    //상세보기 기능 - 총점 , 평균, 수우미양가
     public void computeSungJuk(SungJukVO sj) {
-        sj.setTot(sj.getKor() + sj.getEng() + sj.getMat());
-        sj.setAvg((double) sj.getTot() / 3);
+        sj.setTot( sj.getKor() + sj.getEng() + sj.getMat() );
+        sj.setAvg( (double) sj.getTot() / 3 );
 
-        switch ((int) (sj.getAvg() / 10)) {
-            case 10:
-            case 9:
-                sj.setGrd('수');
-                break;
-            case 8:
-                sj.setGrd('우');
-                break;
-            case 7:
-                sj.setGrd('미');
-                break;
-            case 6:
-                sj.setGrd('양');
-                break;
-            default:
-                sj.setGrd('가');
-                break;
+        switch ((int)(sj.getAvg()/10)) {
+            case 10: case 9: sj.setGrd('수'); break;
+            case 8: sj.setGrd('우'); break;
+            case 7: sj.setGrd('미'); break;
+            case 6: sj.setGrd('양'); break;
+            default: sj.setGrd('가'); break;
         }
     }
 }
