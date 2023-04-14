@@ -49,14 +49,17 @@ public class JS27JDBC {
             pstmt.setInt(3,price);   // 파라메타 1,2,3 은 위에서 인설트로 ?,?,? 자리에 들어갈 내용들- 데이터를 전달 
 
             //SQL문 실행후 결과 확인
-            int cnt = pstmt.executeUpdate(); // DML 실행 시 사용  - 사용만 말했지 이게 뭔지 찾기바람
+            int cnt = pstmt.executeUpdate(); // DML 실행 시 사용
+                                            // -executeUpdate()는 INSERT, UPDATE, DELETE와 같은 DML(Data Manipulation Language) 쿼리문을 실행할 때 사용됩니다.
+                                            // 이 메서드가 반환하는 값은 실행된 쿼리문으로 인해 영향을 받은 레코드(row)의 수입니다.
+
             System.out.println("데이터 입력 확인 : "+ cnt);
 
 
             if(!conn.isClosed())
                 System.out.println("mariadb접속 성공 ");
-        } catch (SQLException e) {
-            System.out.println("DB 접속주소나 아이디/비번을 확인해주세요!");
+        } catch (SQLException e) { //try부분에서 오류가 나면
+            System.out.println("DB 접속주소나 아이디/비번, sql 명령문을 확인해주세요!");
         }finally {
             if (conn !=null) try { conn.close();}catch (Exception ex){}//conn 이 접속중이라면 close 닫아라
             if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라

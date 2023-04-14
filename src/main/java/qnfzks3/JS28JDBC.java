@@ -2,7 +2,10 @@ package qnfzks3;
 
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class JS28JDBC {
     private static String DRV = "org.mariadb.jdbc.Driver";
@@ -15,6 +18,7 @@ public class JS28JDBC {
 
     public static void main(String[] args) {
         //newbooks 테이블의 모든 레코드 조회
+        List<Book> bookdata =new ArrayList<>();
 
 
         try {
@@ -40,7 +44,15 @@ public class JS28JDBC {
             rs = pstmt.executeQuery(); // DML 실행 시 사용 - 실행 한 결과 값을 cnt에 넣어줌   DML이 뭔지도 찾아보기
                                         //executeQuery 도 실행 결과를  전부 가져오는것
                                         //executeUpdate 는 insert, delete, update 명령을 수행했을 때 sql로 명령된 결과 칼럼을 반환
-            while (rs.next()){
+            while (rs.next()){ //rs에 있는 테이블 각행씩 반복 더이상 행이 없을때까지 true 반환
+                Book book = new Book(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5));
+                bookdata.add(book); // 북데이터에 북을 넣는 함수  - 북데이터는 컬렉션으로 위에 정의했음 - 데이터 추가
+
+
                 System.out.print(rs.getInt(1)+" ");   //get 으로 가져오는건 index 순서도 되고
                 System.out.print(rs.getString("title")+" "); // 컬럼 명으로도 가져올 수 있다.
                 System.out.print(rs.getString(3)+"\n");
@@ -53,12 +65,10 @@ public class JS28JDBC {
             if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라
             if (conn !=null) try { conn.close();}catch (Exception ex){}
         }
-
-
-
-
-
-
+        //도서정보 출력
+        for(Book b:bookdata){ //컬렉션 bookdata 안에서 b를 출력
+            System.out.println(b);
+        }
 
     }
 }
@@ -122,4 +132,10 @@ class Book {
         this.regdate = regdate;
     }
 
+    @Override
+    public String toString() {
+
+        String fmt = "%d %s %s %d %s";
+        return String.format(fmt,bookno,title,writer,price,regdate);
+    }
 }
