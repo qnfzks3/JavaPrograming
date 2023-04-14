@@ -52,7 +52,7 @@ public class SungJukV3DAOImpl implements SungJukV3DAO {
                 // 파일에서 성적데이터 한줄을 읽어서
                 String[] val = br.readLine().split("[ ]");
 
-                // SungJuk 객체에 개별 값을 저장하고
+                // SungJuk 객체에 개별 값을 저장하고  - set은 값을 변경
                 SungJukVO sj = new SungJukVO(
                         val[0], Integer.parseInt(val[1]),
                         Integer.parseInt(val[2]), Integer.parseInt(val[3]) );
