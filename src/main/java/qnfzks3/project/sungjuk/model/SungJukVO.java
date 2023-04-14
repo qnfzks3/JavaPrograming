@@ -21,6 +21,13 @@ public class SungJukVO {
         this.mat = mat;
     }
 
+    public SungJukVO(String name, int kor, int eng, int mat, int tot, double avg, char grd) {
+        this(name, kor , eng ,mat); //= this를 여기서 쓰면 위에있는 4개짜리 생성자를 그대로 가져온다. 그후 아래 나머지만 따로 정의해줌
+        this.tot = tot;
+        this.avg = avg;
+        this.grd = grd;
+    }
+
     public String getName() {
         return name;
     }

@@ -20,6 +20,12 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
         sc = new Scanner(System.in);
         sjs = new ArrayList<>();
         sjdao = new SungJukV3DAOImpl();
+        //프로그램 시작 시 미리
+        //파일에 저장된 데이터를 모두 읽어서 arraylist 객체에 저장
+        sjs = sjdao.loadSungJuk();//읽어들이는게 꼭 있어야한다. -- 생성자 시작할 때 파일에 있는 데이터를 바로 로드하도록
+
+
+
     }
 
     // 성적 프로그램 메뉴
@@ -116,6 +122,8 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
 
         SungJukVO one = null;
 
+
+
         try {
             for (SungJukVO sj : sjs) {
                 if (sj.getName().equals(name)) {
@@ -138,8 +146,7 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
     public void readSungJuk() {
         String fmt = "\n %s %d %d %d \n\n";
         
-        //파일에 저장된 데이터를 모두 읽어서 arraylist 객체에 저장
-        sjs=sjdao.loadSungJuk();
+
         
         try {
             for (SungJukVO sj : sjs) {
