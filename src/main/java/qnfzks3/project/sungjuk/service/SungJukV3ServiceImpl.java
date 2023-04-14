@@ -65,7 +65,10 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
             case 3: readOneSungJuk(); break;
             case 4: modifySungJuk(); break;
             case 5: removeSungJuk(); break;
-            case 0: System.exit(0); break;
+            case 0:
+                //ArrayList에 저장된 성적데이터를 파일에 기록
+                sjdao.writeSungJuk(sjs);  //메모리의 모든 성적 데이터
+                System.exit(0); break;  //프로그램이 끝날때-
             default:
                 System.out.println("\n>> 잘못 입력하셨습니다! <<\n");
         }
@@ -183,6 +186,9 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
         // 성적데이터에 파일에 저장
         if ( sjdao.saveSungJuk(sj) )
             System.out.println("\n저장 성공!!\n");
+        
+        //추가된 데이터 반영
+        sjs.add(sj);
     }
 
     public void computeSungJuk(SungJukVO sj) {
