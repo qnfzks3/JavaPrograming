@@ -34,15 +34,15 @@ public class JS27JDBC {
         }
 
 
-        Connection conn=null;
-        PreparedStatement pstmt = null;
+        Connection conn=null;  //연결
+        PreparedStatement pstmt = null; //연결 객체
 
 
         try {
             //데이터베이스 접속
             conn = DriverManager.getConnection(URL,USR,PWD);  //데이터베이스 서버 연결
             //실행한 sql문 생성
-            pstmt = conn.prepareStatement(insertBookSQL);    //설명 x - 찾기 바람
+            pstmt = conn.prepareStatement(insertBookSQL);
             //실행할 sql문 매개변수-(placeholder)에 값 전달
             pstmt.setString(1,bkname);
             pstmt.setString(2,author);
@@ -52,6 +52,7 @@ public class JS27JDBC {
             int cnt = pstmt.executeUpdate(); // DML 실행 시 사용
                                             // -executeUpdate()는 INSERT, UPDATE, DELETE와 같은 DML(Data Manipulation Language) 쿼리문을 실행할 때 사용됩니다.
                                             // 이 메서드가 반환하는 값은 실행된 쿼리문으로 인해 영향을 받은 레코드(row)의 수입니다.
+                                            //간단하게 테이블을 수정(update하면 사용)
 
             System.out.println("데이터 입력 확인 : "+ cnt);
 
