@@ -50,6 +50,13 @@ public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
         }
 
         //사원 상세조회
+       /* System.out.println("조회할 사원번호는?");
+        int empno = sc.nextInt();
+        EMPVO emp = EMPDAOImpl.selectOneEmp(empno);
+        if(emp != null) System.out.println(empno);
+
+        System.out.println(emp);*/
+
         
         //사원 수정
         
@@ -244,7 +251,8 @@ class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검�
 
             while (rs.next()){
                 EMPVO emp=new EMPVO(
-                        rs.getInt(1),rs.getString(2),"",rs.getString(3),"","",rs.getString(4),
+                        rs.getInt(1),rs.getString(2),"",rs.getString(3),"",
+                        "",rs.getString(4),
                         0,0.0,0,rs.getInt(5)
                 );
                 empdata.add(emp);
@@ -261,19 +269,35 @@ class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검�
     }
 
     public static EMPVO selectOneEmp(int empno){
-
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        EMPVO emp=null;
 
         try {
+            conn=JS34JDBCUtil.makeConn();
+            pstmt=conn.prepareStatement(selectOneEMPSQL);
+            pstmt.setInt(1,empno);
 
+            rs=pstmt.executeQuery();
+            while (rs.next()){
+                emp = new EMPVO(rs.getInt(1),rs.getString(2), rs.getString(3),rs.getString(4),
+                        rs.getString(5),rs.getString(6),rs.getString(7), rs.getInt(8),
+                        rs.getDouble(9),rs.getInt(10),rs.getInt(11));
+            }
 
         }catch (Exception ex){
             System.out.println("selectOneEmp에서 오류 발생!!");
             System.out.println(ex.getMessage());
+        }finally {
+            JS34JDBCUtil.closeConn(rs,pstmt,conn);
         }
 
-        return null;
-
+        return emp;
     }
+
+
+
     public static int updateEMP(EMPVO enp){
 
 
