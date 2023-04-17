@@ -1,19 +1,17 @@
 package qnfzks3;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //사원 등록
-        System.out.println("사원등록을 진행합니다."); //1사원 등록은 이렇게 값을 받고
+       /* System.out.println("사원등록을 진행합니다."); //1사원 등록은 이렇게 값을 받고
 
         System.out.println("사원번호는?");
         int empno= sc.nextInt();
@@ -40,11 +38,17 @@ public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
 
         EMPVO emp = new EMPVO(empno,fname,lname,email,phone,hdate,jobid,sal,comm,mgrid,deptno);//2 컬렉션 만들기
         int cnt = EMPDAOImpl.insertEmp(emp);
-        if(cnt>0) System.out.println("사원정보 입력 성공!!");
-
+        if(cnt>0) System.out.println("사원정보 입력 성공!!");*/
 
         //사원 조회
-        
+
+        List<EMPVO> empdata= EMPDAOImpl.selectEmp();
+
+
+        for (EMPVO semp:empdata){
+            System.out.print(semp+" ");
+        }
+
         //사원 상세조회
         
         //사원 수정
@@ -178,7 +182,7 @@ class EMPVO{  //이 경우 돌려쓰면 안되니 static이 아닌 instance - �
         String fmt= "%d,%s,%s,%s,%s,%s,%s,%d,%f,%d,%d";
         return String.format(fmt,empno,fname, lname,email,phone,hdate,jobid,sal,comm,mgrid,deptno);
     }
-}
+} //0. 각 클래스 어떻게 짤지 다 만들었다면 캡슐화부터 진행
 
 interface EMPDAO{
     int insertEmp(EMPVO emp);
@@ -190,14 +194,14 @@ interface EMPDAO{
 
 
 class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검색, update 수정  , delete 삭제
-    private static String insertEMPSQL = "insert into EMPLOYEES values (?,?,?,?,?,?,?,?,?,?,?)";  //실무에서 밖에 빼면 늦어짐 암튼 4.SQL 만들기- 
+    private static final String insertEMPSQL = "insert into EMPLOYEES values (?,?,?,?,?,?,?,?,?,?,?)";  //실무에서 밖에 빼면 로딩이 늦어짐 암튼 4.SQL 만들기-
                                                                 // 여기서 값중에서 외래키로 지정됬다면 외래키에 내용을 따라가지않으면 오류남
-    private static String selectEMPSQL = "select * from EMPLOYEES order by EMPLOYEE_ID desc";
-    private static String selectEMPSQL2 = "select * from EMPLOYEES where title like ? order by empno desc ";
-    private static String deleteEMPSQL = "delete from EMPLOYEES where empno=  ?  ";
-    private static String updateBookSQL = "update EMPLOYEES set title =?, writer=  ?,price=? where empno=?  ";
+    private static final String selectEMPSQL = "select * from EMPLOYEES order by EMPLOYEE_ID desc";
+    private static final String selectOneEMPSQL = "select * from EMPLOYEES where EMPLOYEE_ID like ? order by EMPLOYEE_ID desc ";
+    private static final String deleteEMPSQL = "delete from EMPLOYEES where EMPLOYEE_ID =  ?  ";
+    private static final String updateBookSQL = "update EMPLOYEES set title =?, writer= ?,price=? where empno=?  ";
 
-    public static int insertEmp(EMPVO emp){
+    public static int insertEmp(EMPVO emp){ //inser
         Connection conn = null;
         PreparedStatement pstmt = null;
         int cnt= 0;
@@ -227,30 +231,44 @@ class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검�
         }
         return cnt;
     }
-    public static List<EMPVO> selectOneEmp(){
+    public static List<EMPVO> selectEmp(){
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        List<EMPVO> empdata=new ArrayList<>(); //컬렉션만들기
 
         try {
+            conn=JS34JDBCUtil.makeConn();
+            pstmt=conn.prepareStatement(selectEMPSQL);
+            rs=pstmt.executeQuery();
 
-
+            while (rs.next()){
+                EMPVO emp=new EMPVO(
+                        rs.getInt(1),rs.getString(2),"",rs.getString(3),"","",rs.getString(4),
+                        0,0.0,0,rs.getInt(5)
+                );
+                empdata.add(emp);
+            }
         }catch (Exception ex){
-            System.out.println("selectOneEmp에서 오류 발생!!");
-            System.out.println(ex.getMessage());
+            System.out.println("selectEmp에서 오류 발생!!");
+           ex.printStackTrace();
         }finally {
+            JS34JDBCUtil.closeConn(rs,pstmt,conn);
 
         }
 
-        return null;
+        return empdata;
     }
+
     public static EMPVO selectOneEmp(int empno){
 
 
         try {
 
+
         }catch (Exception ex){
             System.out.println("selectOneEmp에서 오류 발생!!");
             System.out.println(ex.getMessage());
-        }finally {
-
         }
 
         return null;
@@ -267,10 +285,7 @@ class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검�
         }catch (Exception ex){
             System.out.println("updateEMP에서 오류 발생!!");
             System.out.println(ex.getMessage());
-        }finally {
-
         }
-
 
 
         return 0;
@@ -283,8 +298,6 @@ class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검�
         }catch (Exception ex){
             System.out.println("deleteEMP에서 오류 발생!!");
             System.out.println(ex.getMessage());
-        }finally {
-
         }
 
 
