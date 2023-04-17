@@ -62,8 +62,9 @@ public class JS30JDBC {
         } catch (Exception e) {
             System.out.println("DB 접속주소나 아이디/비번 혹은 sql 명령문을 확인해주세요!");
         }finally {
-            if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라
-            if (conn !=null) try { conn.close();}catch (Exception ex){}
+            /*if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라
+            if (conn !=null) try { conn.close();}catch (Exception ex){}*/
+            JS32JDBCUtil.closeConn(null,pstmt,conn); // 특정 객체가 없어 안쓸때는 안에 null을 사용한다.
         }
 
 

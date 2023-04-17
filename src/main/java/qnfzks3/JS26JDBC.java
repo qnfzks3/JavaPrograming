@@ -24,25 +24,20 @@ public class JS26JDBC {
     public static void main(String[] args) {
         //1. JDBC 드라이버를 메모리에 넣기
 
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("mariadb용 JDBC드라이버가 존재하지않습니다.");
-        }
+
         //2. 데이터베이스 서버에 접속하기
         Connection conn=null;
-        String URL = "jdbc:mariadb://fullstacks.cdxqxdvfxgja.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";//"jdbc:mariadb://아마존 주소:3306/fullstacks"
-        String USR = "admin";
-        String PWD = "fullstack_2023";
 
         try {
-            conn = DriverManager.getConnection(URL,USR,PWD);
+            conn=JS32JDBCUtil.makeConn();
+
             if(!conn.isClosed())
                 System.out.println("mariadb접속 성공 ");
         } catch (SQLException e) {
             System.out.println("DB 접속주소나 아이디/비번을 확인해주세요!");
         }finally {
-            if (conn !=null) try { conn.close();}catch (Exception ex){}//conn 이 접속중이라면
+           /* if (conn !=null) try { conn.close();}catch (Exception ex){}//conn 이 접속중이라면*/
+            JS32JDBCUtil.closeConn(null,null,conn); // 특정 객체가 없어 안쓸때는 안에 null을 사용한다.
         }
     }
 

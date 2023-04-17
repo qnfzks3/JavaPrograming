@@ -23,7 +23,7 @@ public class JS29JDBC {
     private static String selectBookSQL = "select * from newbooks where title like ? order by bookno desc "; //sql 에서 ? 는 매개변수를 의미한다.
                                                                             // 여기서 sql에서는 매개변수를 placeholder라고한다.
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //static 정적- static으로 생성된 건 프로그램 실행전 미리 다 만들고 필요할 때 가져다 쓸수있도록 한다.
         //newbooks 테이블에서 도서명에 'IT CookBook'이 포함된 레코드 조회
         List<Book> bookdata =new ArrayList<>();
 
@@ -77,9 +77,7 @@ public class JS29JDBC {
         } catch (Exception e) {
             System.out.println("DB 접속주소나 아이디/비번 혹은 sql 명령문을 확인해주세요!");
         }finally {
-            if (rs !=null) try { rs.close();}catch (Exception ex){}//conn 이 접속중이라면 close 닫아라
-            if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라
-            if (conn !=null) try { conn.close();}catch (Exception ex){}
+            JS32JDBCUtil.closeConn(rs,pstmt,conn);    //JS32JDBCUtil 에서 서버를 close 하는 소스를 져와서 닫자 -- 중복되는것
         }
         //도서정보 출력
         for(Book b:bookdata){ //컬렉션 bookdata 안에서 b를 출력

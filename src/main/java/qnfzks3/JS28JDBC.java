@@ -43,7 +43,7 @@ public class JS28JDBC {
 
         try {
             //데이터베이스 접속
-            conn = DriverManager.getConnection(URL,USR,PWD);  //데이터베이스 서버에 연결 할수있도록하는 드라이버매니저  함수
+            conn=JS32JDBCUtil.makeConn();
             //실행한 sql문 생성
             pstmt = conn.prepareStatement(selectBookSQL);    //SQL 문을 실행할 수 있도록 해주는 함수 prepareStatement
             
@@ -68,9 +68,9 @@ public class JS28JDBC {
         } catch (Exception e) {
             System.out.println("DB 접속주소나 아이디/비번 혹은 sql 명령문을 확인해주세요!");
         }finally {
-            if (rs !=null) try { rs.close();}catch (Exception ex){}//conn 이 접속중이라면 close 닫아라
-            if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라
-            if (conn !=null) try { conn.close();}catch (Exception ex){}
+
+            JS32JDBCUtil.closeConn(rs,pstmt,conn);
+
         }
         //도서정보 출력
         for(Book b:bookdata){ //컬렉션 bookdata 안에서 b를 출력

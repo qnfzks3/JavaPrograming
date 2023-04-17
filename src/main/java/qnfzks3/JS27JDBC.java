@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class JS27JDBC {
-    private static String DRV = "org.mariadb.jdbc.Driver";
-    private static String URL = "jdbc:mariadb://fullstacks.cdxqxdvfxgja.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";//"jdbc:mariadb://아마존 주소:3306/fullstacks"
-    private static String USR = "admin";
-    private static String PWD = "fullstack_2023";
+
 
     private static String insertBookSQL = "insert into newbooks(title,writer,price) values (?,?,?)"; //sql 에서 ? 는 매개변수를 의미한다.
                                                                             // 여기서 sql에서는 매개변수를 placeholder라고한다.
@@ -27,11 +24,7 @@ public class JS27JDBC {
         int price =sc.nextInt();
 
 
-        try {
-            Class.forName(DRV); // 연동된 클래스들을 쓰기위해 JTBC 관련 작업들을 수행
-        } catch (ClassNotFoundException e) {
-            System.out.println(" db접속 드라이버 오류");
-        }
+
 
 
         Connection conn=null;  //연결
@@ -40,7 +33,8 @@ public class JS27JDBC {
 
         try {
             //데이터베이스 접속
-            conn = DriverManager.getConnection(URL,USR,PWD);  //데이터베이스 서버 연결
+            /*conn = DriverManager.getConnection(URL,USR,PWD);  //데이터베이스 서버 연결*/
+            conn=JS32JDBCUtil.makeConn();
             //실행한 sql문 생성
             pstmt = conn.prepareStatement(insertBookSQL);
             //실행할 sql문 매개변수-(placeholder)에 값 전달
@@ -62,8 +56,7 @@ public class JS27JDBC {
         } catch (SQLException e) { //try부분에서 오류가 나면
             System.out.println("DB 접속주소나 아이디/비번, sql 명령문을 확인해주세요!");
         }finally {
-            if (conn !=null) try { conn.close();}catch (Exception ex){}//conn 이 접속중이라면 close 닫아라
-            if (pstmt !=null) try { conn.close();}catch (Exception ex){} // pstmt가 접속중이면 close 닫아라
+            JS32JDBCUtil.closeConn(null,pstmt,conn); // 특정 객체가 없어 안쓸때는 안에 null을 사용한다.
         }
 
 
