@@ -10,66 +10,64 @@ import java.util.Scanner;
 public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //사원 등록
-       /* System.out.println("사원등록을 진행합니다."); //1사원 등록은 이렇게 값을 받고
 
-        System.out.println("사원번호는?");
-        int empno= sc.nextInt();
-        System.out.println("성은?");
-        String fname =sc.next();
-        System.out.println("이름은?");
-        String lname =sc.next();
-        System.out.println("이메일은?");
-        String email =sc.next();
-        System.out.println("핸드폰 번호는?");
-        String phone =sc.next();
-        System.out.println("고용된 일자는?");
-        String hdate =sc.next();
-        System.out.println("직업 아이디는?");
-        String jobid=sc.next();
-        System.out.println("연봉은?");
-        int sal =sc.nextInt();
-        System.out.println("수당은?");
-        Double comm =sc.nextDouble();
-        System.out.println("관리자 번호는?");
-        int mgrid =sc.nextInt();
-        System.out.println("부서번호는?");
-        int deptno =sc.nextInt();
-
-        EMPVO emp = new EMPVO(empno,fname,lname,email,phone,hdate,jobid,sal,comm,mgrid,deptno);//2 컬렉션 만들기
+        // 사원등록
+        /*System.out.println("사원등록을 진행합니다.");
+        System.out.print("사원번호는? ");
+        int empno = sc.nextInt();
+        System.out.print("이름은? ");
+        String fname = sc.next();
+        System.out.print("성은? ");
+        String lname = sc.next();
+        System.out.print("이메일은? ");
+        String email = sc.next();
+        System.out.print("전화번호는? ");
+        String phone = sc.next();
+        System.out.print("입사일은? ");
+        String hdate = sc.next();
+        System.out.print("직책은? ");
+        String jobid = sc.next();
+        System.out.print("급여는? ");
+        int sal = sc.nextInt();
+        System.out.print("수당은? ");
+        double comm = sc.nextDouble();
+        System.out.print("상사번호는? ");
+        int mgrid = sc.nextInt();
+        System.out.print("부서번호는? ");
+        int deptno = sc.nextInt();
+        EMPVO emp = new EMPVO(empno, fname, lname, email, phone,
+                hdate, jobid, sal, comm, mgrid, deptno);
         int cnt = EMPDAOImpl.insertEmp(emp);
-        if(cnt>0) System.out.println("사원정보 입력 성공!!");*/
+        if (cnt > 0) System.out.println("사원정보 입력 성공!!");*/
 
-        //사원 조회
+        /*// 사원조회
+        List<EMPVO> empdata = EMPDAOImpl.selectEmp();
 
-        List<EMPVO> empdata= EMPDAOImpl.selectEmp();
-
-
-        for (EMPVO semp:empdata){
-            System.out.print(semp+" ");
+        String fmt = "%d %s %s %s %d\n";
+        for (EMPVO emp : empdata) {
+            System.out.printf(fmt, emp.getEmpno(), emp.getFname(),
+                    emp.getEmail(), emp.getJobid(), emp.getDeptno());
         }
 
-        //사원 상세조회
-       /* System.out.println("조회할 사원번호는?");
+        // 사원 상세조회
+        System.out.println("조회할 사원번호는? ");
         int empno = sc.nextInt();
+
         EMPVO emp = EMPDAOImpl.selectOneEmp(empno);
-        if(emp != null) System.out.println(empno);
+        if (emp != null) System.out.println(emp);*/
 
-        System.out.println(emp);*/
+        // 사원 수정
 
-        
-        //사원 수정
-        
-        //사원 삭제
-
-
+        // 사원 삭제
+        System.out.println("삭제할 사원번호는?");
+        int empno =sc.nextInt();
+        int cnt = EMPDAOImpl.deleteEmp(empno);
+        if (cnt>0) System.out.println("사원정보 삭제 성공!!");
 
     }
-
-
-
 }
-class EMPVO{  //이 경우 돌려쓰면 안되니 static이 아닌 instance - 각자마다 다 제공하지않는다.
+
+class EMPVO {
     private int empno;
     private String fname;
     private String lname;
@@ -81,6 +79,9 @@ class EMPVO{  //이 경우 돌려쓰면 안되니 static이 아닌 instance - �
     private double comm;
     private int mgrid;
     private int deptno;
+
+    public EMPVO() {
+    }
 
     public EMPVO(int empno, String fname, String lname, String email, String phone, String hdate, String jobid, int sal, double comm, int mgrid, int deptno) {
         this.empno = empno;
@@ -100,84 +101,84 @@ class EMPVO{  //이 경우 돌려쓰면 안되니 static이 아닌 instance - �
         return empno;
     }
 
-    public String getFname() {
-        return fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getHdate() {
-        return hdate;
-    }
-
-    public String getJobid() {
-        return jobid;
-    }
-
-    public int getSal() {
-        return sal;
-    }
-
-    public double getComm() {
-        return comm;
-    }
-
-    public int getMgrid() {
-        return mgrid;
-    }
-
-    public int getDeptno() {
-        return deptno;
-    }
-
     public void setEmpno(int empno) {
         this.empno = empno;
+    }
+
+    public String getFname() {
+        return fname;
     }
 
     public void setFname(String fname) {
         this.fname = fname;
     }
 
+    public String getLname() {
+        return lname;
+    }
+
     public void setLname(String lname) {
         this.lname = lname;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getHdate() {
+        return hdate;
     }
 
     public void setHdate(String hdate) {
         this.hdate = hdate;
     }
 
+    public String getJobid() {
+        return jobid;
+    }
+
     public void setJobid(String jobid) {
         this.jobid = jobid;
+    }
+
+    public int getSal() {
+        return sal;
     }
 
     public void setSal(int sal) {
         this.sal = sal;
     }
 
+    public double getComm() {
+        return comm;
+    }
+
     public void setComm(double comm) {
         this.comm = comm;
     }
 
+    public int getMgrid() {
+        return mgrid;
+    }
+
     public void setMgrid(int mgrid) {
         this.mgrid = mgrid;
+    }
+
+    public int getDeptno() {
+        return deptno;
     }
 
     public void setDeptno(int deptno) {
@@ -186,151 +187,162 @@ class EMPVO{  //이 경우 돌려쓰면 안되니 static이 아닌 instance - �
 
     @Override
     public String toString() {
-        String fmt= "%d,%s,%s,%s,%s,%s,%s,%d,%f,%d,%d";
-        return String.format(fmt,empno,fname, lname,email,phone,hdate,jobid,sal,comm,mgrid,deptno);
+        String fmt = "%d %s %s %s %s %s %s %d %.2f %d %d";
+        return String.format(fmt, empno, fname, lname, email,
+                phone, hdate, jobid, sal, comm, mgrid, deptno);
     }
-} //0. 각 클래스 어떻게 짤지 다 만들었다면 캡슐화부터 진행
+}
 
-interface EMPDAO{
+interface EMPDAO {
     int insertEmp(EMPVO emp);
     List<EMPVO> selectEmp();
     EMPVO selectOneEmp(int empno);
-    int updateEMP(EMPVO emp);
-    int deleteEMP(EMPVO emp);
+    int updateEmp(EMPVO emp);
+    int deleteEmp(int empno);
 }
 
+class EMPDAOImpl {
+    private static String insertEmpSQL =
+            " insert into employees values (?,?,?,?,?, ?,?,?,?,?, ?) ";
 
-class EMPDAOImpl{  //5개 작성해야한다  insert select 전체 , select 검색, update 수정  , delete 삭제
-    private static final String insertEMPSQL = "insert into EMPLOYEES values (?,?,?,?,?,?,?,?,?,?,?)";  //실무에서 밖에 빼면 로딩이 늦어짐 암튼 4.SQL 만들기-
-                                                                // 여기서 값중에서 외래키로 지정됬다면 외래키에 내용을 따라가지않으면 오류남
-    private static final String selectEMPSQL = "select * from EMPLOYEES order by EMPLOYEE_ID desc";
-    private static final String selectOneEMPSQL = "select * from EMPLOYEES where EMPLOYEE_ID like ? order by EMPLOYEE_ID desc ";
-    private static final String deleteEMPSQL = "delete from EMPLOYEES where EMPLOYEE_ID =  ?  ";
-    private static final String updateBookSQL = "update EMPLOYEES set title =?, writer= ?,price=? where empno=?  ";
+    private static String selectEmpSQL =
+            " select employee_id, first_name, email, job_id, department_id " +
+                    " from employees order by employee_id ";
 
-    public static int insertEmp(EMPVO emp){ //inser
+    private static String selectOneEmpSQL =
+            " select * from employees where employee_id = ? ";
+
+    private static String deleteEmpSQL = "delete from employees where employee_id=?"; //삭제도 외래키때문에 삭제되지 않는 데이터도 있다.
+
+    public static int insertEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        int cnt= 0;
+        int cnt = 0;
 
         try {
-            conn=JS34JDBCUtil.makeConn();
-            pstmt=conn.prepareStatement(insertEMPSQL);
-            pstmt.setInt(1,emp.getEmpno());
-            pstmt.setString(2,emp.getFname());
-            pstmt.setString(3,emp.getLname());
-            pstmt.setString(4,emp.getEmail());
-            pstmt.setString(5,emp.getPhone());
-            pstmt.setString(6,emp.getHdate());
-            pstmt.setString(7,emp.getJobid());
-            pstmt.setInt(8,emp.getSal());
-            pstmt.setDouble(9,emp.getComm());
-            pstmt.setInt(10,emp.getMgrid());
-            pstmt.setInt(11,emp.getDeptno());
-            cnt=pstmt.executeUpdate();
+            conn = JS34JDBCUtil.makeConn();
+            pstmt = conn.prepareStatement(insertEmpSQL);
+            pstmt.setInt(1, emp.getEmpno());
+            pstmt.setString(2, emp.getFname());
+            pstmt.setString(3, emp.getLname());
+            pstmt.setString(4, emp.getEmail());
+            pstmt.setString(5, emp.getPhone());
+            pstmt.setString(6, emp.getHdate());
+            pstmt.setString(7, emp.getJobid());
+            pstmt.setInt(8, emp.getSal());
+            pstmt.setDouble(9, emp.getComm());
+            pstmt.setInt(10, emp.getMgrid());
+            pstmt.setInt(11, emp.getDeptno());
 
-        }catch (Exception ex){
-            System.out.println("insertEmp에서 오류 발생!!");
+            cnt = pstmt.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("insertEmp에서 오류발생!!");
             System.out.println(ex.getMessage());
-        }finally {
-            JS34JDBCUtil.closeConn(null,pstmt,conn);
-
+        } finally {
+            JS34JDBCUtil.closeConn(null, pstmt, conn);
         }
+
         return cnt;
     }
-    public static List<EMPVO> selectEmp(){
-        Connection conn=null;
-        PreparedStatement pstmt=null;
-        ResultSet rs=null;
-        List<EMPVO> empdata=new ArrayList<>(); //컬렉션만들기
+
+    public static List<EMPVO> selectEmp() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<EMPVO> empdata = new ArrayList<>();
 
         try {
-            conn=JS34JDBCUtil.makeConn();
-            pstmt=conn.prepareStatement(selectEMPSQL);
-            rs=pstmt.executeQuery();
+            conn = JS34JDBCUtil.makeConn();
+            pstmt = conn.prepareStatement(selectEmpSQL);
+            rs = pstmt.executeQuery();
 
-            while (rs.next()){
-                EMPVO emp=new EMPVO(
-                        rs.getInt(1),rs.getString(2),"",rs.getString(3),"",
-                        "",rs.getString(4),
-                        0,0.0,0,rs.getInt(5)
-                );
+            while (rs.next()) {
+                EMPVO emp = new EMPVO(
+                        rs.getInt(1), rs.getString(2),
+                        "", rs.getString(3), "", "",
+                        rs.getString(4), 0, 0.0, 0,
+                        rs.getInt(5) );
                 empdata.add(emp);
             }
-        }catch (Exception ex){
-            System.out.println("selectEmp에서 오류 발생!!");
-           ex.printStackTrace();
-        }finally {
-            JS34JDBCUtil.closeConn(rs,pstmt,conn);
-
+        } catch (Exception ex) {
+            System.out.println("selectEmp에서 오류발생!!");
+            System.out.println(ex.getMessage());
+        } finally {
+            JS34JDBCUtil.closeConn(rs, pstmt, conn);
         }
 
         return empdata;
     }
 
-    public static EMPVO selectOneEmp(int empno){
-        Connection conn=null;
-        PreparedStatement pstmt=null;
-        ResultSet rs=null;
-        EMPVO emp=null;
+    public static EMPVO selectOneEmp(int empno) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        EMPVO emp = null;
 
         try {
-            conn=JS34JDBCUtil.makeConn();
-            pstmt=conn.prepareStatement(selectOneEMPSQL);
-            pstmt.setInt(1,empno);
+            conn = JS34JDBCUtil.makeConn();
+            pstmt = conn.prepareStatement(selectOneEmpSQL);
+            pstmt.setInt(1, empno);
 
-            rs=pstmt.executeQuery();
-            while (rs.next()){
-                emp = new EMPVO(rs.getInt(1),rs.getString(2), rs.getString(3),rs.getString(4),
-                        rs.getString(5),rs.getString(6),rs.getString(7), rs.getInt(8),
-                        rs.getDouble(9),rs.getInt(10),rs.getInt(11));
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                emp = new EMPVO(rs.getInt(1), rs.getString(2),
+                        rs.getString(3),rs.getString(4),
+                        rs.getString(5),rs.getString(6),
+                        rs.getString(7),rs.getInt(8),
+                        rs.getDouble(9),rs.getInt(10),
+                        rs.getInt(11));
             }
 
-        }catch (Exception ex){
-            System.out.println("selectOneEmp에서 오류 발생!!");
+        } catch (Exception ex) {
+            System.out.println("selectOneEmp에서 오류발생!!");
             System.out.println(ex.getMessage());
-        }finally {
+        } finally {
             JS34JDBCUtil.closeConn(rs,pstmt,conn);
         }
 
         return emp;
     }
 
-
-
-    public static int updateEMP(EMPVO enp){
-
-
-
-
+    public static int updateEmp(EMPVO emp) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
 
         try {
 
-        }catch (Exception ex){
-            System.out.println("updateEMP에서 오류 발생!!");
+        } catch (Exception ex) {
+            System.out.println("updateEmp에서 오류발생!!");
             System.out.println(ex.getMessage());
-        }
+        } finally {
 
+        }
 
         return 0;
     }
-    public static int deleteEMP(int empno){
 
+    public static int deleteEmp(int empno) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int cnt=0;
 
         try {
+            conn= JS34JDBCUtil.makeConn();
+            pstmt=conn.prepareStatement(deleteEmpSQL);
+            pstmt.setInt(1,empno);
+            cnt = pstmt.executeUpdate();
 
-        }catch (Exception ex){
-            System.out.println("deleteEMP에서 오류 발생!!");
+        } catch (Exception ex) {
+            System.out.println("deleteEmp에서 오류발생!!");
             System.out.println(ex.getMessage());
+        } finally {
+            JS34JDBCUtil.closeConn(null,pstmt,conn);
         }
 
-
-        return 0;
-
-
-        
+        return cnt;
     }
-
 
 }
 
