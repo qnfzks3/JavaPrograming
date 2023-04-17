@@ -99,7 +99,7 @@ class Student {
     @Override
     public String toString() {
         String fmt="%d %s %s %s %s %d \n";
-        return String.format(fmt, hakbun,name,addr,birth,dept,prof);
+        return String.format(fmt, hakbun,name,addr,birth,dept,prof); //데이터 기록
     }
 
 

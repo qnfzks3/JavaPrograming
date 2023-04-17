@@ -30,7 +30,8 @@ public class JS21Collection {
         //데이터 추가 : add(대상)
         names.add("혜교");    //배열에 위치 0,1,2,3 이런식으로 지정할 필요없이 추가 한다.
         names.add("지현");    // 만약 특정 위치에 데이터를 추가 하고 싶다면 : add(위치, 대상)
-        names.add("혜지");    
+        names.add("혜지");
+
         
         names.add(1,"원영"); //이렇게 따로 또 지정이 가능하다. 만약 기존 1번자리에 위에처럼 지현이 들어가있다면
                                             // 지현은 1번에서 2번자리로 가게되고 1번 자리에는 "원영" 이 온다.
@@ -42,10 +43,10 @@ public class JS21Collection {
         }
         System.out.println("");
 
-        //특정요소를 조회하고 싶다면?  : get(위치) 사용
+        //특정요소를 조회하고 싶다면?  : get(위치) 사용 -
         System.out.println(names.get(1)); //names의 2번째 요소 
         
-        //특정요소 변경 : set(위치 , 새로운 값)
+        //set(위치 , 새로운 값): 특정요소 변경
         names.set(1,"윤아");
         System.out.println(names.get(1));
 
@@ -56,16 +57,22 @@ public class JS21Collection {
 
         //특정요소 제거 : remove(값)
 
-        names.remove("수지");
-        System.out.println(names.get(names.size()-1));
+        names.remove("혜지");
+        System.out.println(names.get(names.size()-1));  //-1 을 준건 컬렉션도 0부터 시작하기 때문에 - 마지막 위치에있는 요소 출력
 
+
+
+        for(String name : names){
+            System.out.print(name+" ");
+        }
+        System.out.println("");
 
         // 배열에서 데이터 검색 - 위치로 찾음 : get(위치)   , indexOf
         //                   - 값으로 찾음 : contains, indexOf
         // '지현'을 검색 1
         for (int i = 0; i < names.size(); i++) {         // 검색하는 방법 자체를 외워보자   (size는 컬랙션의 크기)
-            if(names.get(i).equals("지현")){
-                System.out.printf("%d번째 자리에서 지현을 찾음",i);
+            if(names.get(i).equals("지현")){ // i번째에서 지현이 있어?
+                System.out.printf("%d번째 자리에서 지현을 찾음",i); // 지현이 몇번째에 위치했는지 알려줌
             }
         }//위치 기반 검색 -- 이젠 옜날방식이다.
 
@@ -111,14 +118,19 @@ public class JS21Collection {
         }
 
         //v2- foreach  - 추천
-        for (GameInfo game: games){
+        for (GameInfo game: games){  // games 안에 있는 각각 요소들 차례대로 반복 -> game은 첫번째 요소이다. game은 두번째 요소이다. game은 세번째 요소이다.
             if (game.name.equals("젤다의 전설")){
                 System.out.println(game.price);
             }
         }
 
         //v3 - contains  - 객체형일땐 for을 사용해야함  -추천
+        // contains() 은 해당 ()안에 문자내용이 포함 되어있는지 찾는 함수
         for (GameInfo game : games){
+            if (game.name.contains("젤다")){
+                System.out.println(game.price);
+
+            }
             if (game.name.contains("젤다의 전설")){
                 System.out.println(game.price);
 
@@ -143,7 +155,7 @@ public class JS21Collection {
     }
 }
 
-class GameInfo{
+class GameInfo{ // 보통 다중 타입을 쓰고싶으면 클래스로 한다. 단일이면 <String>을 바로 사용해서 나타내고 
      String name;
      int price;
 

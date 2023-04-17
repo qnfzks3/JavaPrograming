@@ -66,7 +66,6 @@ public class SungJukV3ServiceImpl implements SungJukV2Service {
             case 4: modifySungJuk(); break;
             case 5: removeSungJuk(); break;
             case 0:
-
                 System.exit(0); break;  //프로그램이 끝날때-
             default:
                 System.out.println("\n>> 잘못 입력하셨습니다! <<\n");
