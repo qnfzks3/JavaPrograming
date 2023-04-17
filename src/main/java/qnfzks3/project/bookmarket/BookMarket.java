@@ -9,7 +9,7 @@ public class BookMarket {
 
         BookMarketService bksrv= new BookMarketService();
 
-        bksrv.registerMember();;//회원 등록 및 정보 확인
+        bksrv.registerMember();//회원 등록 및 정보 확인
 
         while (true) {
             //bookmarket

@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class JS32JDBCUtil { //자 27부터 31 까지 데이터 검색 수정 삭제 등 다 한곳에 만들수 있도록 중복되는것들을 이곳으로 다 뺌 - 데이터 연결, 데이터 닫음
                            //26 27먼 적용해봄
-    private static String DRV = "org.mariadb.jdbc.Driver"; //마리아 디비 드라이버
-    private static String URL = "jdbc:mariadb://fullstacks.cdxqxdvfxgja.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";//"jdbc:mariadb://아마존 주소:3306/fullstacks"
-    private static String USR = "admin";
-    private static String PWD = "fullstack_2023";
+    private static final String DRV = "org.mariadb.jdbc.Driver"; //마리아 디비 드라이버
+    private static final String URL = "jdbc:mariadb://fullstacks.cdxqxdvfxgja.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";//"jdbc:mariadb://아마존 주소:3306/fullstacks"
+    private static final String USR = "admin";
+    private static final String PWD = "fullstack_2023";
 
     //데이터베이스 접속 객체 생성
     public static Connection makeConn(){ //void가 없으니 함수이기때문에 return이 있어야한다. , 데이터 연결을 다른 클래스에도 적용해보자.

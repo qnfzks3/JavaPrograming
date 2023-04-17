@@ -15,12 +15,12 @@ import java.util.Scanner;
 
 
 public class JS29JDBC {
-    private static String DRV = "org.mariadb.jdbc.Driver";
-    private static String URL = "jdbc:mariadb://fullstacks.cdxqxdvfxgja.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";//"jdbc:mariadb://아마존 주소:3306/fullstacks"
-    private static String USR = "admin";
-    private static String PWD = "fullstack_2023";
+    private static final String DRV = "org.mariadb.jdbc.Driver";
+    private static final String URL = "jdbc:mariadb://fullstacks.cdxqxdvfxgja.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";//"jdbc:mariadb://아마존 주소:3306/fullstacks"
+    private static final String USR = "admin";
+    private static final String PWD = "fullstack_2023";
 
-    private static String selectBookSQL = "select * from newbooks where title like ? order by bookno desc "; //sql 에서 ? 는 매개변수를 의미한다.
+    private static final String selectBookSQL = "select * from newbooks where title like ? order by bookno desc "; //sql 에서 ? 는 매개변수를 의미한다.
                                                                             // 여기서 sql에서는 매개변수를 placeholder라고한다.
 
     public static void main(String[] args) { //static 정적- static으로 생성된 건 프로그램 실행전 미리 다 만들고 필요할 때 가져다 쓸수있도록 한다.

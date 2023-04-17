@@ -53,17 +53,17 @@ public class JS10Method {
     // 접근제한자 static 반환유형 메서드명(매개변수목록)
     public static void sayHello() {
         System.out.println("Hello, World!!");
-    };
+    }
 
     // 인삿말 v2 - 메서드 매개변수 사용
     public static void sayHello2(String msg) {
         System.out.printf("Hello, %s!!\n", msg);
-    };
+    }
 
     // 인삿말 v3 - 반환형 메서드 선언
     public static String sayHello3(String msg) {
         return String.format("Hello, %s!!\n", msg);
-    };
+    }
 
     // 년도를 입력하면 윤년여부를 계산해서 출력
     // 윤년여부를 계산하는 반환형 메서드 : computeLeapYear

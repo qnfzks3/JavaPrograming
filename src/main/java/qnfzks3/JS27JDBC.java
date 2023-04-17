@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class JS27JDBC {
 
 
-    private static String insertBookSQL = "insert into newbooks(title,writer,price) values (?,?,?)"; //sql 에서 ? 는 매개변수를 의미한다.
+    private static final String insertBookSQL = "insert into newbooks(title,writer,price) values (?,?,?)"; //sql 에서 ? 는 매개변수를 의미한다.
                                                                             // 여기서 sql에서는 매개변수를 placeholder라고한다.
 
     public static void main(String[] args) {

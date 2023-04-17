@@ -24,12 +24,12 @@ public class JS07Array {
 
         //점심메뉴 정의v2
         //자료형 변수명[] 혹은  자료형[] 변수명   이렇게 2가지로 Array 정의 가능
-        String menus[]={"라면","자장면","탕수육","민트초코","떡볶이"};
+        String[] menus ={"라면","자장면","탕수육","민트초코","떡볶이"};
         //System.out.printf("%s %s %s %s %s",menus[0],menus[1],menus[2],menus[3],menus[4]);
         for (int i = 0; i < 5; i++) {
             System.out.printf(menus[i]+"\n");
         }
-        System.out.println("");
+        System.out.println();
 
         //점심메뉴 정의v3
         //배열 정의시 한번 설정한 크기는 변경불가능 자료구조임  - 배열의 크기는 고정
@@ -46,7 +46,7 @@ public class JS07Array {
         for (int i = 0; i < menus2.length; i++) {   // length를 이용해서 배열의 크기를 나타낸다.
             System.out.printf(menus2[i]+"\n");
         }
-        System.out.println("");
+        System.out.println();
 
         //점심메뉴 정의 v4
         //동적배열 - ArrayList   -- collection 프레임워크의 한 요소 - 다음에 다시 설명

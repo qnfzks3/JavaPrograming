@@ -17,22 +17,21 @@ public class BookMarketService { //클래스 파일들 가져다 쓰기위한
     }
     public String displayMenu(){ //함수에 리턴값으로 준다면 void-없다면 함수도 리턴값의 자료형을 따라 가야한다.
         //bookmarket 메뉴 작성
-        StringBuilder sb=new StringBuilder();
 
-        sb.append("----------------------------\n")
-                .append("Welcome to Shopping Mall \n")
-                .append("Welcome to Shopping Market \n")
-                .append("---------------------------- \n")
-                .append("1.  고객정보 확인하기 \n")
-                .append("2. 장바구니 상품 목록 보기 \n")
-                .append("3. 장바구니 비우기 \n")
-                .append("4. 장바구니 상품 추가 \n")
-                .append("5. 장바구니 주문수량 변경 \n")
-                .append("6. 장바구니 항목 삭제 \n")
-                .append("7. 상품 주문 영수증 출력 \n")
-                .append("0. 프로그램 종료 \n")
-                .append("---------------------------- \n")
-       .append("작업을 선택하세요 : \n");  // sout 으로 한거랑 크게 다르지 않음 그냥 이런 방법도 있다
+        String sb = "----------------------------\n" +
+                "Welcome to Shopping Mall \n" +
+                "Welcome to Shopping Market \n" +
+                "---------------------------- \n" +
+                "1.  고객정보 확인하기 \n" +
+                "2. 장바구니 상품 목록 보기 \n" +
+                "3. 장바구니 비우기 \n" +
+                "4. 장바구니 상품 추가 \n" +
+                "5. 장바구니 주문수량 변경 \n" +
+                "6. 장바구니 항목 삭제 \n" +
+                "7. 상품 주문 영수증 출력 \n" +
+                "0. 프로그램 종료 \n" +
+                "---------------------------- \n" +
+                "작업을 선택하세요 : \n";  // sout 으로 한거랑 크게 다르지 않음 그냥 이런 방법도 있다
 
         System.out.print(sb);
         String menu = sc.next(); //선택한, 작업할 메뉴를 입력 받기

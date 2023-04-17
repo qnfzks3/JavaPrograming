@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SungJukV3DAOImpl implements SungJukV3DAO {  //DAO 에는 읽고 쓰고 저장하는 함수만 모아두는 클래스
-    private String fname = "c:/Java/sungjukv3.dat";
+    private final String fname = "c:/Java/sungjukv3.dat";
     private FileWriter fw = null;
     private FileReader fr = null;
     private BufferedWriter bw = null;

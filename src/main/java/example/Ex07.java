@@ -24,7 +24,7 @@ public class Ex07 {
         String fmt = "%d |   %2d  %2d  %2d  %2d  %2d  %2d  %2d  %2d  %2d\n";
         for (int i = 1; i <= 9 ; i++) {
             System.out.printf(fmt,
-                    i, i * 1, i * 2,  i * 3, i * 4, i * 5, i * 6, i * 7, i * 8, i * 9);
+                    i, i, i * 2,  i * 3, i * 4, i * 5, i * 6, i * 7, i * 8, i * 9);
         }
 
         // v3
@@ -38,7 +38,7 @@ public class Ex07 {
             for (int j = 2; j <= 9; j++) {
                 System.out.printf("  %2d", i * j); // 나머지 뒷 8부분
             }
-            System.out.println("");
+            System.out.println();
         }
 
 

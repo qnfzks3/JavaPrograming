@@ -41,7 +41,7 @@ public class JS21Collection {
         for(String name : names){
             System.out.print(name+" ");
         }
-        System.out.println("");
+        System.out.println();
 
         //특정요소를 조회하고 싶다면?  : get(위치) 사용 -
         System.out.println(names.get(1)); //names의 2번째 요소 
@@ -65,7 +65,7 @@ public class JS21Collection {
         for(String name : names){
             System.out.print(name+" ");
         }
-        System.out.println("");
+        System.out.println();
 
         // 배열에서 데이터 검색 - 위치로 찾음 : get(위치)   , indexOf
         //                   - 값으로 찾음 : contains, indexOf
@@ -85,7 +85,7 @@ public class JS21Collection {
         }//값 기반 검색 이젠 이렇게 검색함
 
         //'지현'을 검색 4
-        if(names.indexOf("지현")>-1){
+        if(names.contains("지현")){
             System.out.println("데이터 찾음");
         }
 

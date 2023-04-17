@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class SungJukV2ServiceImpl implements SungJukV2Service {
     private Scanner sc = null;
     private List<SungJukVO> sjs = null;
-    private int idx = 0;
+    private final int idx = 0;
 
     public SungJukV2ServiceImpl() {
         sc = new Scanner(System.in);
@@ -22,18 +22,17 @@ public class SungJukV2ServiceImpl implements SungJukV2Service {
     public int displayMenu() {
         int menu = -1;
 
-        StringBuffer sb = new StringBuffer();
-        sb.append("---------------------------- \n")
-                .append(" 성적 처리 프로그램 v2 \n")
-                .append("---------------------------- \n")
-                .append(" 1. 성적데이터 추가 \n")
-                .append(" 2. 성적데이터 조회 \n")
-                .append(" 3. 성적데이터 상세조회 \n")
-                .append(" 4. 성적데이터 수정 \n")
-                .append(" 5. 성적데이터 삭제 \n")
-                .append(" 0. 프로그램 종료 \n")
-                .append("---------------------------- \n")
-                .append(" 작업을 선택하세요 : ");
+        String sb = "---------------------------- \n" +
+                " 성적 처리 프로그램 v2 \n" +
+                "---------------------------- \n" +
+                " 1. 성적데이터 추가 \n" +
+                " 2. 성적데이터 조회 \n" +
+                " 3. 성적데이터 상세조회 \n" +
+                " 4. 성적데이터 수정 \n" +
+                " 5. 성적데이터 삭제 \n" +
+                " 0. 프로그램 종료 \n" +
+                "---------------------------- \n" +
+                " 작업을 선택하세요 : ";
         System.out.print(sb);
 
         try {

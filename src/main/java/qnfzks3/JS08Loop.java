@@ -15,7 +15,7 @@ public class JS08Loop {
             System.out.print(i + " ");
             ++i;          // 증감식
         }
-        System.out.println("");
+        System.out.println();
 
         // 1부터 100사이 짝수 출력 v2
         i = 1;
@@ -23,7 +23,7 @@ public class JS08Loop {
             if (i % 2 == 0) System.out.print(i + " ");
             ++i;
         }
-        System.out.println("");
+        System.out.println();
 
         // 1 ~ 100까지의 정수의 총합 출력 v2
         i = 1;

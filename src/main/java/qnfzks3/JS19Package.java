@@ -31,7 +31,7 @@ public class JS19Package {
             double x= Math.random();
             System.out.print(((int)(x*45))+1+" ");
         }
-        System.out.println("");
+        System.out.println();
         //String 클래스
         //ex) 파일 명이 abc123.png라 할 때 파일명과 확장자를 분리해서 출력
 
@@ -96,7 +96,7 @@ public class JS19Package {
         System.out.println(f);
         
         Integer g=new Integer(f);  //이걸 박싱이라 한다 -  박싱 : 기본형->클래스형 으로 변경시킴 -출력 해본다면 별차이는 없다 형태만 변한 것이기에
-        System.out.println(g.toString());
+        System.out.println(g);
 
         int h = g.intValue();  // 언박싱 : 클래스형 - > 기본형
         System.out.println(h);
