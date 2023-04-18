@@ -13,8 +13,10 @@ public class JS34JDBCUtil { //자 27부터 31 까지 데이터 검색 수정 삭
     public static Connection makeConn(){ //void가 없으니 함수이기때문에 return이 있어야한다. , 데이터 연결을 다른 클래스에도 적용해보자.
         Connection conn= null;
         try {
+
             Class.forName(DRV); // 연동된 클래스들을 쓰기위해 JDBC 관련 작업들을 수행 - 드라이버 접속
             conn = DriverManager.getConnection(URL,USR,PWD);  //데이터베이스 서버 연결
+
         } catch (ClassNotFoundException e) {
             System.out.println(" db접속 드라이버 오류");
         }catch (SQLException e) { //try부분에서 오류가 나면

@@ -3,6 +3,7 @@ package qnfzks3.project.sungjuk.model;
 import java.util.StringJoiner;
 
 public class SungJukVO {
+    private int sjno;
     private String name;
     private int kor;
     private int eng;
@@ -26,6 +27,14 @@ public class SungJukVO {
         this.tot = tot;
         this.avg = avg;
         this.grd = grd;
+    }
+
+    public void setSjno(int sjno) {
+        this.sjno = sjno;
+    }
+
+    public int getSjno() {
+        return sjno;
     }
 
     public String getName() {
@@ -83,6 +92,7 @@ public class SungJukVO {
     public void setGrd(char grd) {
         this.grd = grd;
     }
+
 
     @Override
     public String toString() {
