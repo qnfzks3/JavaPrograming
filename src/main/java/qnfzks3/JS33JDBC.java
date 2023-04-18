@@ -11,6 +11,11 @@ public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        // EMPDAOImpl는 불필요하게 인스턴스 객체로 생성되지 않게 함
+        // 따라서, singleton 패턴을 이용해서 단일 객체로만 만들어지도록 함
+        // EMPDAO empdao = new EMPDAOImpl();
+        EMPDAO empdao = EMPDAOImpl.getInstance();
+
         // 사원등록
         /*System.out.println("사원등록을 진행합니다.");
         System.out.print("사원번호는? ");
@@ -37,11 +42,11 @@ public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
         int deptno = sc.nextInt();
         EMPVO emp = new EMPVO(empno, fname, lname, email, phone,
                 hdate, jobid, sal, comm, mgrid, deptno);
-        int cnt = EMPDAOImpl.insertEmp(emp);
+        int cnt = empdao.insertEmp(emp);
         if (cnt > 0) System.out.println("사원정보 입력 성공!!");*/
 
-        /*// 사원조회
-        List<EMPVO> empdata = EMPDAOImpl.selectEmp();
+        // 사원조회
+        List<EMPVO> empdata = empdao.selectEmp();
 
         String fmt = "%d %s %s %s %d\n";
         for (EMPVO emp : empdata) {
@@ -50,19 +55,33 @@ public class JS33JDBC { //한파일에 모든 클라스 다만들어보자 1. VO
         }
 
         // 사원 상세조회
-        System.out.println("조회할 사원번호는? ");
+        /*System.out.println("조회할 사원번호는? ");
         int empno = sc.nextInt();
-
-        EMPVO emp = EMPDAOImpl.selectOneEmp(empno);
+        EMPVO emp = empdao.selectOneEmp(empno);
         if (emp != null) System.out.println(emp);*/
 
         // 사원 수정
+        System.out.println("수정할 사원번호는? ");
+        int empno = sc.nextInt();
+        System.out.print("이름은? ");
+        String fname = sc.next();
+        System.out.print("성은? ");
+        String lname = sc.next();
+        System.out.print("이메일은? ");
+        String email = sc.next();
+        System.out.print("전화번호는? ");
+        String phone = sc.next();
+
+        EMPVO emp = new EMPVO(empno, fname, lname, email, phone);
+        int cnt = empdao.updateEmp(emp);
+        if (cnt > 0) System.out.println("사원정보 수정 성공!!");
+
 
         // 사원 삭제
-        System.out.println("삭제할 사원번호는?");
-        int empno =sc.nextInt();
-        int cnt = EMPDAOImpl.deleteEmp(empno);
-        if (cnt>0) System.out.println("사원정보 삭제 성공!!");
+        /*System.out.println("삭제할 사원번호는? ");
+        int empno = sc.nextInt();
+        int cnt = empdao.deleteEmp(empno);
+        if (cnt > 0) System.out.println("사원정보 삭제 성공!!");*/
 
     }
 }
@@ -95,6 +114,14 @@ class EMPVO {
         this.comm = comm;
         this.mgrid = mgrid;
         this.deptno = deptno;
+    }
+
+    public EMPVO(int empno, String fname, String lname, String email, String phone) {
+        this.empno = empno;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.phone = phone;
     }
 
     public int getEmpno() {
@@ -201,20 +228,34 @@ interface EMPDAO {
     int deleteEmp(int empno);
 }
 
-class EMPDAOImpl {
-    private static String insertEmpSQL =
+class EMPDAOImpl implements EMPDAO {
+    private String insertEmpSQL =
             " insert into employees values (?,?,?,?,?, ?,?,?,?,?, ?) ";
 
-    private static String selectEmpSQL =
+    private String selectEmpSQL =
             " select employee_id, first_name, email, job_id, department_id " +
                     " from employees order by employee_id ";
 
-    private static String selectOneEmpSQL =
-            " select * from employees where employee_id = ? ";
+    private String selectOneEmpSQL = " select * from employees where employee_id = ? ";
 
-    private static String deleteEmpSQL = "delete from employees where employee_id=?"; //삭제도 외래키때문에 삭제되지 않는 데이터도 있다.
+    private String updateEmpSQL =
+            " update employees set first_name = ?, last_name = ?, " +
+                    " email = ?, phone_number = ? where employee_id = ? ";
 
-    public static int insertEmp(EMPVO emp) {
+    private String deleteEmpSQL = " delete from employees where employee_id = ? ";
+
+    // 싱글톤 패턴을 위해 선언한 변수
+    private static EMPDAO instance = null;
+
+    private EMPDAOImpl() {
+    } // 생성자 호출 금지 - 인스턴스 객체로 생성되지 못하게 막음
+
+    public static EMPDAO getInstance() {
+        if (instance == null) instance = new EMPDAOImpl();
+        return instance;
+    }
+
+    public int insertEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         int cnt = 0;
@@ -246,7 +287,7 @@ class EMPDAOImpl {
         return cnt;
     }
 
-    public static List<EMPVO> selectEmp() {
+    public List<EMPVO> selectEmp() {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -275,7 +316,7 @@ class EMPDAOImpl {
         return empdata;
     }
 
-    public static EMPVO selectOneEmp(int empno) {
+    public EMPVO selectOneEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -307,42 +348,51 @@ class EMPDAOImpl {
         return emp;
     }
 
-    public static int updateEmp(EMPVO emp) {
+    public int updateEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int cnt = 0;
 
         try {
+            conn = JS34JDBCUtil.makeConn();
 
+            pstmt = conn.prepareStatement(updateEmpSQL);
+            pstmt.setString(1, emp.getFname());
+            pstmt.setString(2, emp.getLname());
+            pstmt.setString(3, emp.getEmail());
+            pstmt.setString(4, emp.getPhone());
+            pstmt.setInt(5, emp.getEmpno());
+
+            cnt = pstmt.executeUpdate();
         } catch (Exception ex) {
             System.out.println("updateEmp에서 오류발생!!");
             System.out.println(ex.getMessage());
         } finally {
-
+            JS34JDBCUtil.closeConn(null, pstmt, conn);
         }
 
-        return 0;
+        return cnt;
     }
 
-    public static int deleteEmp(int empno) {
+    public int deleteEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        int cnt=0;
+        int cnt = 0;
 
         try {
-            conn= JS34JDBCUtil.makeConn();
-            pstmt=conn.prepareStatement(deleteEmpSQL);
-            pstmt.setInt(1,empno);
-            cnt = pstmt.executeUpdate();
+            conn = JS34JDBCUtil.makeConn();
+            pstmt = conn.prepareStatement(deleteEmpSQL);
+            pstmt.setInt(1, empno);
 
+            cnt = pstmt.executeUpdate();
         } catch (Exception ex) {
             System.out.println("deleteEmp에서 오류발생!!");
             System.out.println(ex.getMessage());
         } finally {
-            JS34JDBCUtil.closeConn(null,pstmt,conn);
+            JS34JDBCUtil.closeConn(null, pstmt, conn);
         }
 
         return cnt;
     }
 
 }
-
