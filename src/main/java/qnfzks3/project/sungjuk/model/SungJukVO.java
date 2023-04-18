@@ -11,6 +11,7 @@ public class SungJukVO {
     private int tot;
     private double avg;
     private char grd;
+    private String regdate;
 
     public SungJukVO() {
     }                                                            //그냥 가져다 쓸수도 있도록 항상 매개변수가 없을 수도 있기때문에
@@ -93,10 +94,19 @@ public class SungJukVO {
         this.grd = grd;
     }
 
+    public void setRegdate(String regdate) {
+        this.regdate = regdate;
+    }
+
+    public String getRegdate() {
+        return regdate;
+    }
 
     @Override
     public String toString() {
-        String fmt = "%s %d %d %d %d %.1f %s\n";
-        return String.format(fmt, name, kor, eng, mat, tot, avg, grd);
+        String fmt = "%d %s %d %d %d %d %.1f %s %s\n";
+        return String.format(fmt,sjno, name, kor, eng, mat, tot, avg, grd,regdate);
     }
+
+
 }

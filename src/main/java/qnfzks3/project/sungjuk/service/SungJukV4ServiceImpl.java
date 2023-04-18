@@ -67,16 +67,11 @@ public class SungJukV4ServiceImpl implements SungJukV2Service {
 
     public void removeSungJuk() {
         // 이름입력 -> 대상검색 -> 대상제거
-        System.out.print("삭제할 학생이름은? ");
-        String name = sc.next();
+        System.out.print("삭제할 학생번호는? ");
+        int sjno = sc.nextInt();
 
-        for (SungJukVO sj : sjs) {
-            if (sj.getName().equals(name)) {
-                sjs.remove(sj);   // 대상을 list에서 삭제
-                System.out.println("\n삭제되었습니다\n");
-                break;
-            }
-        }
+       if(sjdao.deleteSungJuk(sjno)>0)
+           System.out.println("성적데이터 삭제 완료");
 
     }
 
@@ -111,24 +106,14 @@ public class SungJukV4ServiceImpl implements SungJukV2Service {
     }
 
     public void readOneSungJuk() {
-        // 이름입력 -> 대상검색 -> 대상출력
-        System.out.print("조회할 학생이름은? ");
-        String name = sc.next();
+        // 번호입력 -> 대상검색 -> 대상출력
+        System.out.print("조회할 학생번호는? ");
+        int sjno = sc.nextInt();
 
-        SungJukVO one = null;
+        SungJukVO sj = sjdao.selectOneSungJuk(sjno);
 
-        try {
-            for (SungJukVO sj : sjs) {
-                if (sj.getName().equals(name)) {
-                    one = sj;
-                    break;
-                }
-            }
-        } catch (NullPointerException ex) {
-        }
-
-        if (one != null) {
-            System.out.printf("\n %s \n\n", one);
+        if (sj != null) {
+            System.out.printf("\n %s \n\n", sj);
         } else {
             System.out.println("\n찾는 데이터가 없습니다!\n");
         }
